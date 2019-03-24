@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Nursery Rhyme Quiz using vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </link>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <h1>{{ quiz.title }}</h1>
+
+        <div v-for="(question, index) in quiz.questions">
+            <!-- Loops through the questions contained in the Quiz Array.
+         Because the loop is applied to entire div, the loop will affect all the div's contents ie. the question text and the radio buttons containing the answers-->
+
+            <h2>{{ question.text }}</h2>
+
+            <ol>
+                <li v-for="response in question.responses">
+
+                    <label>
+
+                        <input type="radio" v-bind:value="response.correct" v-bind:name="index"
+                            v-model="userResponses[index]"> {{response.text}}
+
+                    </label>
+
+                </li>
+
+            </ol>
+
+        </div>
+
+        <p class="scorebox">
+            <strong> Total score: {{ score() }} / {{ quiz.questions.length }} </strong>
+        </p>
+    </div>
+
+    </div>
+
+    <script>
+        window.onload = function () {
+
+            var quiz = {
+                title: "Nursery Rhyme Quiz!",
+                questions: [
+
+                    {
+                        text: "1. Jack and Jill went...",
+                        responses: [{
+                                text: "to the market"
+                            },
+                            {
+                                text: "up the hill",
+                                correct: true
+                            },
+                            {
+                                text: "to the sea"
+                            },
+                            {
+                                text: "to the forest"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "2. This little piggy went to the market, this little piggy...",
+                        responses: [{
+                                text: "stayed at home",
+                                correct: true
+                            },
+                            {
+                                text: "had roast beef"
+                            },
+                            {
+                                text: "stayed at home"
+                            },
+                            {
+                                text: "had none"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "3. Twinkle, twinkle little...",
+                        responses: [{
+                                text: "diamond"
+                            },
+                            {
+                                text: "emerald"
+                            },
+                            {
+                                text: "star",
+                                correct: true
+                            },
+                            {
+                                text: "ring"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "4. Goldilocks and the three...",
+                        responses: [{
+                                text: "bears",
+                                correct: true
+                            },
+                            {
+                                text: "kittens"
+                            },
+                            {
+                                text: "koalas"
+                            },
+                            {
+                                text: "birds"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "5. The Eensy Weensy Spider...",
+                        responses: [{
+                                text: "frightened a little girl"
+                            },
+                            {
+                                text: "climbed up a wall"
+                            },
+                            {
+                                text: "went for a walk"
+                            },
+                            {
+                                text: "climbed up the water spout",
+                                correct: true
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "6. The Big Bad Wolf...",
+                        responses: [{
+                                text: "hired a bulldozer"
+                            },
+                            {
+                                text: "was welcomed in"
+                            },
+                            {
+                                text: "huffed and puffed",
+                                correct: true
+                            },
+                            {
+                                text: "took houses apart brick by brick"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "7. Who stole the Queen of Hearts's tarts?",
+                        responses: [{
+                                text: "The Knave of hearts",
+                                correct: true
+                            },
+                            {
+                                text: "The Prince of Mince"
+                            },
+                            {
+                                text: "The peasant"
+                            },
+                            {
+                                text: "The King of Wings"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "8. Who did the black sheep not give any wool to?",
+                        responses: [{
+                                text: "The Master"
+                            },
+                            {
+                                text: "The King",
+                                correct: true
+                            },
+                            {
+                                text: "The dame"
+                            },
+                            {
+                                text: "The little boy"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "9. Ringa ringa rosy, a pocket full of...",
+                        responses: [{
+                                text: "sleepsand"
+                            },
+                            {
+                                text: "secrets"
+                            },
+                            {
+                                text: "posy",
+                                correct: true
+                            },
+                            {
+                                text: "dandelions"
+                            },
+                        ]
+                    },
+
+                    {
+                        text: "10. Three little kittens have lost their...",
+                        responses: [{
+                                text: "shoes"
+                            },
+                            {
+                                text: "hats"
+                            },
+                            {
+                                text: "lust for life"
+                            },
+                            {
+                                text: "mittens",
+                                correct: true
+                            },
+                        ]
+                    },
+
+                ]
+            };
+
+
+
+            new Vue({
+                el: '#app',
+                data: {
+                    quiz: quiz, //This binds the entire array of quiz, with all its containing questions etc, to the app, making the array fully accessible.
+                    userResponses: Array(quiz.questions.length).fill(false)
+                },
+
+                methods: {
+
+                    score: function () {
+                        return this.userResponses.filter(function (val) {
+                            return val
+                        }).length;
+                    },
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

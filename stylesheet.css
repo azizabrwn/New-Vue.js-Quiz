@@ -1,0 +1,20 @@
+body {
+    background-color: lemonchiffon;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    font-family: cursive;
+}
+
+h1 {
+    padding: 20px 0 20px 0;
+    margin: 20px 0 20px 0;
+}
+
+#app {
+    display: inline-block;
+}
+
+.scorebox {
+    background-color: rosybrown;
+}
